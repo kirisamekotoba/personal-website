@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Sketchbook</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.0/p5.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Courier+Prime:ital,wght@0,400;0,700;1,400&family=Special+Elite&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div id="canvas-container"></div>
+
+    <main id="content">
+        <!-- Landing Section -->
+        <section id="landing" class="active-section">
+            <div class="hero-text">
+                <h1>Hi,<br>This is My Sketchbook.<br>Let's Flip Through It.</h1>
+            </div>
+            <div class="tree-container">
+                <!-- Tree image is loaded in p5.js or used as an overlay -->
+                <!-- We will use p5 to draw lines connecting to it, but here is the image for reference placement if needed, simplified to just use p5 for now -->
+            </div>
+        </section>
+
+        <!-- Works Section -->
+        <section id="works">
+            <h2>Works.</h2>
+            <div class="gallery">
+                <!-- Placeholders for works -->
+                <div class="work-item">
+                    <h3>Project Alpha</h3>
+                    <p>Design / Dev</p>
+                </div>
+                <div class="work-item">
+                    <h3>Project Beta</h3>
+                    <p>Illustration</p>
+                </div>
+                <div class="work-item">
+                    <h3>Project Gamma</h3>
+                    <p>Concept</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Experience Section -->
+        <section id="experience">
+            <h2>Experience.</h2>
+            <div class="map-container">
+                 <!-- Map will be drawn/managed by p5 or CSS -->
+            </div>
+            <ul class="timeline">
+                <li>
+                    <span class="date">2024</span>
+                    <span class="role">Senior Designer @ Studio X</span>
+                </li>
+                <li>
+                    <span class="date">2022</span>
+                    <span class="role">Frontend Dev @ Tech Y</span>
+                </li>
+            </ul>
+        </section>
+
+        <!-- About Section -->
+        <section id="about">
+            <div class="about-content">
+                <h2>About.</h2>
+                <p>"Creativity is allowing yourself to make mistakes. Art is knowing which ones to keep."</p>
+                <div class="social-links">
+                    <a href="#">Email</a>
+                    <a href="#">Instagram</a>
+                    <a href="#">Xiaohongshu</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script src="sketch.js"></script>
+</body>
+</html>
