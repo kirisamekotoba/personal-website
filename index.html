@@ -1,82 +1,167 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Sketchbook</title>
-    <link rel="stylesheet" href="style.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.0/p5.min.js"></script>
+    <title>Philosophy & Structure</title>
+    <!-- Fonts: Geometric for structure, Serif for philosophy -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Courier+Prime:ital,wght@0,400;0,700;1,400&family=Special+Elite&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;600&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.0/p5.min.js"></script>
 </head>
+
 <body>
+    <!-- p5.js Canvas Container (Background Layer) -->
     <div id="canvas-container"></div>
 
-    <main id="content">
-        <!-- Landing Section -->
-        <section id="landing" class="active-section">
-            <div class="hero-text">
-                <h1>Hi,<br>This is My Sketchbook.<br>Let's Flip Through It.</h1>
-            </div>
-            <div class="tree-container">
-                <!-- Tree image is loaded in p5.js or used as an overlay -->
-                <!-- We will use p5 to draw lines connecting to it, but here is the image for reference placement if needed, simplified to just use p5 for now -->
-            </div>
-        </section>
+    <!-- Mondrian Grid Overlay (CSS Grid) -->
+    <div class="mondrian-grid">
+        <div class="grid-line v-line v1"></div>
+        <div class="grid-line v-line v2"></div>
+        <div class="grid-line v-line v3"></div>
+        <div class="grid-line h-line h1"></div>
+        <div class="grid-line h-line h2"></div>
+        <div class="grid-line h-line h3"></div>
+    </div>
 
-        <!-- Works Section -->
-        <section id="works">
-            <h2>Works.</h2>
-            <div class="gallery">
-                <!-- Placeholders for works -->
-                <div class="work-item">
-                    <h3>Project Alpha</h3>
-                    <p>Design / Dev</p>
-                </div>
-                <div class="work-item">
-                    <h3>Project Beta</h3>
-                    <p>Illustration</p>
-                </div>
-                <div class="work-item">
-                    <h3>Project Gamma</h3>
-                    <p>Concept</p>
-                </div>
-            </div>
-        </section>
+    <!-- Content Wrapper -->
+    <div class="wrapper">
+        <header>
+            <nav>
+                <ul class="nav-list">
+                    <li class="nav-item" data-target="home">
+                        <span class="nav-title">01. Home</span>
+                        <span class="nav-subtitle">Info & Guide</span>
+                    </li>
+                    <li class="nav-item" data-target="philosophy">
+                        <span class="nav-title">02. Philosophy</span>
+                        <span class="nav-subtitle">Essays & Metaphysics</span>
+                    </li>
+                    <li class="nav-item" data-target="research">
+                        <span class="nav-title">03. Research</span>
+                        <span class="nav-subtitle">Projects & Inquiry</span>
+                    </li>
+                    <li class="nav-item" data-target="cv">
+                        <span class="nav-title">04. Curriculum Vitae</span>
+                        <span class="nav-subtitle">Experience & Works</span>
+                    </li>
+                </ul>
+            </nav>
+        </header>
 
-        <!-- Experience Section -->
-        <section id="experience">
-            <h2>Experience.</h2>
-            <div class="map-container">
-                 <!-- Map will be drawn/managed by p5 or CSS -->
-            </div>
-            <ul class="timeline">
-                <li>
-                    <span class="date">2024</span>
-                    <span class="role">Senior Designer @ Studio X</span>
-                </li>
-                <li>
-                    <span class="date">2022</span>
-                    <span class="role">Frontend Dev @ Tech Y</span>
-                </li>
-            </ul>
-        </section>
+        <main>
+            <!-- Sections are absolutely positioned or grid-placed to overlap animations elegantly -->
 
-        <!-- About Section -->
-        <section id="about">
-            <div class="about-content">
-                <h2>About.</h2>
-                <p>"Creativity is allowing yourself to make mistakes. Art is knowing which ones to keep."</p>
-                <div class="social-links">
-                    <a href="#">Email</a>
-                    <a href="#">Instagram</a>
-                    <a href="#">Xiaohongshu</a>
+            <section id="home" class="active-section">
+                <div class="content-block hero">
+                    <h1>Objective<br>Structure.</h1>
+                    <p class="subtitle">Fluid Thought.</p>
+                    <div class="divider"></div>
+                    <p class="text-body">
+                        Welcome. This digital space is a curated archive of philosophical inquiry and structural design.
+                        <br><br>
+                        Navigate via the top menu to explore essays on metaphysics, research projects, and my academic
+                        portfolio.
+                        <br><br>
+                        <em>"The logic of the world is prior to all truth and falsehood."</em>
+                    </p>
                 </div>
-            </div>
-        </section>
-    </main>
+            </section>
+
+            <section id="philosophy">
+                <div class="content-block">
+                    <h2>Introduction to Philosophy</h2>
+                    <div class="article-list">
+                        <article>
+                            <h3>On the Nature of Being</h3>
+                            <p class="meta">Metaphysics • 2024</p>
+                            <p>An exploration of ontology in the modern digital age.</p>
+                        </article>
+                        <article>
+                            <h3>Logic & Language</h3>
+                            <p class="meta">Analytic Philosophy • 2023</p>
+                            <p>Deconstructing the syntax of thought.</p>
+                        </article>
+                        <article>
+                            <h3>Ethics of Artificial Mind</h3>
+                            <p class="meta">Applied Ethics • 2025</p>
+                            <p>What does it mean to be a moral agent in silicon?</p>
+                        </article>
+                    </div>
+                </div>
+            </section>
+
+            <section id="research">
+                <div class="content-block">
+                    <h2>Research Projects</h2>
+                    <div class="project-grid">
+                        <div class="project-card">
+                            <div class="card-header">Project A</div>
+                            <p>Phenomenology of User Interfaces.</p>
+                        </div>
+                        <div class="project-card">
+                            <div class="card-header">Project B</div>
+                            <p>Algorithmic Bias and Justice.</p>
+                        </div>
+                        <div class="project-card">
+                            <div class="card-header">Project C</div>
+                            <p>The Aesthetics of Code.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="cv">
+                <div class="content-block">
+                    <h2>Curriculum Vitae</h2>
+                    <ul class="cv-list">
+                        <li>
+                            <strong>PhD Candidate, Philosophy</strong><br>
+                            University of Somewhere, 2024 - Present
+                        </li>
+                        <li>
+                            <strong>MA, Logic & Computation</strong><br>
+                            Institute of Technology, 2022 - 2024
+                        </li>
+                        <li>
+                            <strong>BA, Liberal Arts</strong><br>
+                            College of Arts, 2018 - 2022
+                        </li>
+                    </ul>
+                    <div class="resources">
+                        <h3>Reading List</h3>
+                        <p>Wittgenstein • Kant • Heidegger • Chalmers</p>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
 
     <script src="sketch.js"></script>
+    <script>
+        // Simple JS for Navigation switching (non-p5 part)
+        document.querySelectorAll('.nav-item').forEach(item => {
+            item.addEventListener('click', () => {
+                // Update active state
+                document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+                item.classList.add('active');
+
+                // Switch Section
+                const targetId = item.getAttribute('data-target');
+                document.querySelectorAll('section').forEach(s => {
+                    s.classList.remove('active-section');
+                    if (s.id === targetId) {
+                        setTimeout(() => s.classList.add('active-section'), 50);
+                    }
+                });
+            });
+        });
+    </script>
 </body>
+
 </html>

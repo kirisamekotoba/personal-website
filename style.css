@@ -1,9 +1,22 @@
 :root {
-    --bg-color: #f6f6f6;
+    --bg-color: #f4f1ea;
+    /* Warm, paper-like off-white */
+    --line-color: #2b2b2b;
+    /* Dark grey, not pure black */
     --text-color: #1a1a1a;
-    --accent-color: #333;
-    --font-heading: 'Special Elite', cursive;
-    --font-body: 'Courier Prime', monospace;
+    --accent-red: #a63737;
+    /* Muted Brick Red */
+    --accent-blue: #2c3e50;
+    /* Muted Navy */
+    --accent-yellow: #d4ac0d;
+    /* Muted Mustard */
+
+    --font-heading: 'Jost', sans-serif;
+    --font-body: 'Playfair Display', serif;
+
+    --grid-gap: 0px;
+    /* Mondrian lines are the grid itself */
+    --nav-height: 100px;
 }
 
 body {
@@ -12,123 +25,281 @@ body {
     background-color: var(--bg-color);
     color: var(--text-color);
     font-family: var(--font-body);
-    overflow-x: hidden;
+    overflow: hidden;
+    /* Canvas handles background */
+    height: 100vh;
+    width: 100vw;
 }
 
 #canvas-container {
     position: fixed;
     top: 0;
     left: 0;
-    width: 100vw;
-    height: 100vh;
+    width: 100%;
+    height: 100%;
     z-index: -1;
-    pointer-events: none; /* Let clicks pass through to HTML elements if needed, but we might want p5 to capture them. For now, let's keep it behind. */
 }
 
-/* Sections */
-section {
-    min-height: 100vh;
-    padding: 2rem;
-    box-sizing: border-box;
-    display: none; /* Hidden by default, toggled via JS */
+/* === Navigation === */
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: var(--nav-height);
+    background: transparent;
+    /* Let lines show through */
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    border-bottom: 2px solid var(--line-color);
+}
+
+.nav-list {
+    display: flex;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.nav-item {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-right: 1px solid var(--line-color);
+    cursor: pointer;
+    transition: background 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.nav-item:last-child {
+    border-right: none;
+}
+
+.nav-item:hover {
+    background: rgba(255, 255, 255, 0.5);
+}
+
+.nav-item.active {
+    background: var(--text-color);
+    color: var(--bg-color);
+}
+
+.nav-title {
+    font-family: var(--font-heading);
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    font-size: 0.9rem;
+    transition: transform 0.3s ease;
+}
+
+.nav-subtitle {
+    font-family: var(--font-body);
+    font-style: italic;
+    font-size: 0.8rem;
     opacity: 0;
-    transition: opacity 0.5s ease;
+    transform: translateY(10px);
+    transition: all 0.3s ease;
+    position: absolute;
+    bottom: 20px;
+}
+
+.nav-item:hover .nav-title {
+    transform: translateY(-10px);
+}
+
+.nav-item:hover .nav-subtitle {
+    opacity: 1;
+    transform: translateY(10px);
+    /* Keep it lower */
+}
+
+/* === Mondrian Grid Lines (Decorative CSS Grid) === */
+.mondrian-grid {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.grid-line {
+    background-color: var(--line-color);
+    position: absolute;
+}
+
+.v-line {
+    width: 1px;
+    height: 100%;
+    top: 0;
+}
+
+.h-line {
+    height: 1px;
+    width: 100%;
+    left: 0;
+}
+
+/* Asymmetric Placement - Mondrian Style */
+.v1 {
+    left: 25%;
+}
+
+.v2 {
+    left: 60%;
+}
+
+.h1 {
+    top: var(--nav-height);
+    height: 2px;
+}
+
+/* Matches header border */
+.h2 {
+    top: 40%;
+}
+
+.h3 {
+    top: 80%;
+}
+
+/* === Main Content === */
+main {
+    position: relative;
+    margin-top: var(--nav-height);
+    height: calc(100vh - var(--nav-height));
+    width: 100%;
+    z-index: 10;
+    /* Sections will be placed within the grid areas typically */
+}
+
+section {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+    display: flex;
+    justify-content: center;
+    /* Center by default, override in specific sections */
+    align-items: center;
 }
 
 section.active-section {
-    display: flex; /* Or block depending on layout */
     opacity: 1;
+    pointer-events: auto;
 }
 
-/* Landing */
-#landing {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+.content-block {
+    background: rgba(244, 241, 234, 0.95);
+    /* High opacity to read text over lines */
+    border: 1px solid var(--line-color);
+    padding: 3rem;
+    max-width: 600px;
+    box-shadow: 10px 10px 0px rgba(0, 0, 0, 0.05);
+    position: relative;
 }
 
-.hero-text h1 {
+/* Section Specific Positioning to align with Grid */
+#home .content-block {
+    /* Align to intersection of v2 and h2 roughly */
+    position: absolute;
+    left: 10%;
+    top: 15%;
+}
+
+#philosophy .content-block {
+    position: absolute;
+    right: 10%;
+    top: 10%;
+    max-width: 500px;
+}
+
+#research .content-block {
+    position: absolute;
+    left: 30%;
+    top: 20%;
+    width: 600px;
+}
+
+/* Typography */
+h1 {
     font-family: var(--font-heading);
-    font-size: 3rem;
-    line-height: 1.4;
-    max-width: 600px;
+    font-size: 4rem;
+    margin: 0;
+    line-height: 0.9;
+    letter-spacing: -1px;
 }
 
-/* Works */
-#works {
-    flex-direction: column;
+h2 {
+    font-family: var(--font-heading);
+    font-size: 2rem;
+    border-bottom: 2px solid var(--accent-red);
+    display: inline-block;
+    margin-bottom: 1.5rem;
 }
 
-.gallery {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 2rem;
-    margin-top: 3rem;
-}
-
-.work-item {
-    border: 2px solid var(--text-color);
-    padding: 2rem;
-    text-align: center;
-    transition: transform 0.3s ease;
-    cursor: pointer;
-    background: white;
-    box-shadow: 5px 5px 0px rgba(0,0,0,0.1);
-}
-
-.work-item:hover {
-    transform: translateY(-5px);
-    box-shadow: 8px 8px 0px rgba(0,0,0,0.2);
-}
-
-/* Experience */
-#experience {
-    flex-direction: column;
-    align-items: center;
-}
-
-.timeline {
-    list-style: none;
-    padding: 0;
-    margin-top: 2rem;
-    max-width: 600px;
-}
-
-.timeline li {
-    padding: 1rem 0;
-    border-bottom: 1px dashed #ccc;
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
-}
-
-.timeline .date {
-    font-weight: bold;
-    margin-right: 2rem;
-}
-
-/* About */
-#about {
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-}
-
-.about-content p {
-    font-size: 1.5rem;
+.subtitle {
+    font-family: var(--font-body);
     font-style: italic;
+    font-size: 1.5rem;
+    color: var(--accent-blue);
+    margin-top: 0.5rem;
+}
+
+.divider {
+    height: 2px;
+    width: 50px;
+    background: var(--line-color);
     margin: 2rem 0;
-    max-width: 600px;
 }
 
-.social-links a {
-    color: var(--text-color);
-    text-decoration: none;
-    margin: 0 1rem;
-    font-size: 1.2rem;
-    border-bottom: 2px solid transparent;
+.text-body {
+    font-size: 1.1rem;
+    line-height: 1.6;
 }
 
-.social-links a:hover {
-    border-bottom: 2px solid var(--text-color);
+/* Lists */
+.article-list article,
+.project-card,
+.cv-list li {
+    margin-bottom: 2rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid #ddd;
+}
+
+.meta {
+    font-size: 0.8rem;
+    color: #666;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* Project Grid */
+.project-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+}
+
+.project-card {
+    border: 1px solid var(--line-color);
+    padding: 1rem;
+    transition: background 0.3s;
+}
+
+.project-card:hover {
+    background: var(--accent-yellow);
+    color: white;
 }
