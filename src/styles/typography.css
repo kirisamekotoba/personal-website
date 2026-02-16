@@ -1,0 +1,46 @@
+h1 {
+    font-family: var(--font-heading);
+    font-size: 3rem;
+    margin: 0 0 1rem 0;
+}
+
+h2 {
+    font-family: var(--font-heading);
+    font-size: 2rem;
+    border-bottom: 2px solid #a63737;
+    display: inline-block;
+    margin-bottom: 1rem;
+}
+
+h3 {
+    font-family: var(--font-heading);
+    font-size: 1.2rem;
+    margin: 0;
+}
+
+.subtitle {
+    font-style: italic;
+    color: #2c3e50;
+    font-size: 1.2rem;
+}
+
+.meta {
+    font-family: var(--font-heading);
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    color: #666;
+    margin: 0.5rem 0;
+}
+
+.project-card {
+    border: 1px solid var(--line-color);
+    padding: 1rem;
+    margin-bottom: 1rem;
+    background: white;
+}
+
+.card-header {
+    font-weight: bold;
+    font-family: var(--font-heading);
+    margin-bottom: 0.5rem;
+}

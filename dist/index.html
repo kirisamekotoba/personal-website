@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Philosophy & Structure</title>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;600&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap"
+        rel="stylesheet">
+  <script type="module" crossorigin src="/assets/index-8CD_AYDa.js"></script>
+  <link rel="stylesheet" crossorigin href="/assets/index-cgYvBwpx.css">
+</head>
+
+<body>
+    <!-- Persistent Background Layers -->
+    <div id="canvas-container"></div>
+    <div id="grid-container">
+        <!-- Dynamic Grid Lines injected by JS/CSS -->
+        <div class="line v-line v1"></div>
+        <div class="line v-line v2"></div>
+        <div class="line h-line h1 top-nav-border"></div>
+    </div>
+
+    <!-- Navigation -->
+    <header>
+        <nav>
+            <ul class="nav-list">
+                <li class="nav-item active" data-target="home">
+                    <span class="nav-title">01. Home</span>
+                    <span class="nav-subtitle">Info & Guide</span>
+                </li>
+                <li class="nav-item" data-target="philosophy">
+                    <span class="nav-title">02. Philosophy</span>
+                    <span class="nav-subtitle">Essays & Metaphysics</span>
+                </li>
+                <li class="nav-item" data-target="research">
+                    <span class="nav-title">03. Research</span>
+                    <span class="nav-subtitle">Projects & Inquiry</span>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Dynamic Content Area -->
+    <main id="app">
+        <!-- Content injected by Router -->
+    </main>
+
+</body>
+
+</html>

@@ -1,0 +1,17 @@
+{
+    "title": "Research Projects",
+    "projects": [
+        {
+            "title": "Project A: Phenomenology",
+            "description": "Investigating user interfaces through the lens of Husserl's phenomenology."
+        },
+        {
+            "title": "Project B: Algorithmic Justice",
+            "description": "Analyzing bias in predictive models and proposing structural remedies."
+        },
+        {
+            "title": "Project C: Code Aesthetics",
+            "description": "Is clean code beauty? A study on the aesthetics of software architecture."
+        }
+    ]
+}

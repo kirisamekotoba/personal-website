@@ -1,0 +1,24 @@
+{
+    "title": "Introduction to Philosophy",
+    "theme": "structural",
+    "articles": [
+        {
+            "title": "On the Nature of Being",
+            "meta": "Metaphysics",
+            "year": "2024",
+            "summary": "An exploration of ontology in the modern digital age. How do we define existence in a virtual space?"
+        },
+        {
+            "title": "Logic & Language",
+            "meta": "Analytic Philosophy",
+            "year": "2023",
+            "summary": "Deconstructing the syntax of thought. 'The limits of my language mean the limits of my world.'"
+        },
+        {
+            "title": "Ethics of Artificial Mind",
+            "meta": "Applied Ethics",
+            "year": "2025",
+            "summary": "What does it mean to be a moral agent in silicon? Determining responsibility in autonomous systems."
+        }
+    ]
+}
