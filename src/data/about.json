@@ -1,0 +1,34 @@
+{
+    "en": {
+        "title": "About Me",
+        "contact": "Contact",
+        "cv": "Download CV",
+        "email": "kirisame@example.com",
+        "socials": [
+            {
+                "name": "GitHub",
+                "link": "https://github.com/kirisamekotoba"
+            },
+            {
+                "name": "Twitter",
+                "link": "#"
+            }
+        ]
+    },
+    "cn": {
+        "title": "关于我",
+        "contact": "联系方式",
+        "cv": "下载简历",
+        "email": "kirisame@example.com",
+        "socials": [
+            {
+                "name": "GitHub",
+                "link": "https://github.com/kirisamekotoba"
+            },
+            {
+                "name": "Twitter",
+                "link": "#"
+            }
+        ]
+    }
+}

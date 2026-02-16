@@ -1,5 +1,14 @@
 {
-    "title": "Objective Structure.",
-    "subtitle": "Fluid Thought.",
-    "intro": "Welcome to the archive. <br><br> This digital space separates form from content. It uses a <strong>modular architecture</strong> to render philosophical concepts into visual reality.<br><br>Explore the sections to see the p5.js engine adapt to different modes of inquiry."
+    "en": {
+        "title": "HE Kunquan's Personal Website",
+        "intro_1": "Welcome.",
+        "intro_2": "This is a digital sketchbook.",
+        "intro_3": "Move around to leave your mark."
+    },
+    "cn": {
+        "title": "何坤全的个人网站",
+        "intro_1": "欢迎。",
+        "intro_2": "这是一本数字手绘本。",
+        "intro_3": "随意移动，留下印记。"
+    }
 }

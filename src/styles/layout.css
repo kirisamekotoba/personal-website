@@ -5,7 +5,37 @@
     --line-color: #2b2b2b;
     --font-heading: 'Jost', sans-serif;
     --font-body: 'Playfair Display', serif;
+    --font-hand: 'Reenie Beanie', cursive;
+    --font-mono: 'JetBrains Mono', monospace;
     --nav-height: 100px;
+}
+
+/* THEMES */
+body.theme-organic {
+    --bg-color: #f4f1ea;
+    /* Paper */
+    --text-color: #2b2b2b;
+    /* Hand drawn style */
+}
+
+body.theme-swiss {
+    --bg-color: #ffffff;
+    /* Stark White */
+    --text-color: #000000;
+    /* Stark Black */
+    --line-color: #000000;
+}
+
+body.theme-blueprint {
+    --bg-color: #002b36;
+    /* Blueprint Dark Blue */
+    --text-color: #ffffff;
+    --line-color: rgba(255, 255, 255, 0.2);
+}
+
+body.theme-minimal {
+    --bg-color: #e0e0e0;
+    --text-color: #333;
 }
 
 /* Reset & Base */
@@ -18,6 +48,7 @@ body {
     width: 100vw;
     height: 100vh;
     overflow: hidden;
+    transition: background-color 0.5s ease;
 }
 
 #canvas-container {
@@ -30,43 +61,9 @@ body {
 }
 
 #grid-container {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    pointer-events: none;
-    z-index: 0;
-}
-
-.line {
-    position: absolute;
-    background-color: var(--line-color);
-}
-
-.v-line {
-    width: 1px;
-    height: 100%;
-    top: 0;
-}
-
-.h-line {
-    height: 1px;
-    width: 100%;
-    left: 0;
-}
-
-.v1 {
-    left: 25%;
-}
-
-.v2 {
-    left: 60%;
-}
-
-.h1 {
-    top: var(--nav-height);
-    height: 2px;
+    /* Only visible in Swiss mode? Or handled by p5? */
+    /* Let's hide CSS grid for now and rely on Sketches for visuals to avoid conflict */
+    display: none;
 }
 
 /* Navigation */
@@ -77,6 +74,10 @@ header {
     width: 100%;
     height: var(--nav-height);
     z-index: 100;
+    display: flex;
+    justify-content: space-between;
+    background: transparent;
+    /* Let canvas show through */
 }
 
 .nav-list {
@@ -88,23 +89,21 @@ header {
 }
 
 .nav-item {
-    flex: 1;
+    padding: 0 2rem;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    border-right: 1px solid var(--line-color);
     cursor: pointer;
-    transition: background 0.3s;
+    transition: all 0.3s;
 }
 
 .nav-item:hover {
-    background: rgba(255, 255, 255, 0.5);
+    opacity: 0.7;
 }
 
 .nav-item.active {
-    background: var(--text-color);
-    color: var(--bg-color);
+    border-bottom: 2px solid var(--text-color);
 }
 
 .nav-title {
@@ -119,6 +118,19 @@ header {
     font-style: italic;
     opacity: 0.6;
     margin-top: 5px;
+}
+
+/* Lang Toggle */
+#lang-toggle {
+    background: none;
+    border: 1px solid var(--text-color);
+    color: var(--text-color);
+    margin: 1rem;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    font-family: var(--font-heading);
+    height: 40px;
+    align-self: center;
 }
 
 /* Content App Container */
@@ -145,8 +157,80 @@ header {
 }
 
 .content-block {
-    background: rgba(244, 241, 234, 0.9);
-    border: 1px solid var(--line-color);
+    background: rgba(255, 255, 255, 0.8);
     padding: 2rem;
-    max-width: 600px;
+    max-width: 800px;
+    backdrop-filter: blur(5px);
+}
+
+/* SPECIFIC MODULE STYLES */
+
+/* Home - Handwriting */
+.section-home .hero-block h1 {
+    font-family: var(--font-hand);
+    font-style: normal;
+    font-size: 5rem;
+    line-height: 0.8;
+}
+
+.section-home .hand-text {
+    font-family: var(--font-hand);
+    font-size: 2rem;
+    transform: rotate(-2deg);
+    margin: 1rem 0;
+}
+
+.section-home .delay-2 {
+    transform: rotate(1deg);
+    margin-left: 20px;
+}
+
+.section-home .delay-3 {
+    transform: rotate(-1deg);
+    margin-left: 40px;
+}
+
+/* Philosophy - Swiss */
+.swiss-style {
+    background: #fff;
+    border: 4px solid #000;
+    box-shadow: 10px 10px 0px #000;
+    border-radius: 0;
+}
+
+.swiss-style h2 {
+    font-family: 'Helvetica', 'Arial', sans-serif;
+    font-weight: 900;
+    font-size: 4rem;
+    letter-spacing: -2px;
+    border: none;
+    text-transform: uppercase;
+}
+
+.active .nav-title {
+    font-weight: 900;
+}
+
+/* Research - Blueprint */
+.blueprint-style {
+    background: rgba(0, 43, 54, 0.8);
+    /* Dark Blue */
+    color: #fff;
+    border: 1px dashed #fff;
+}
+
+.blueprint-card {
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    color: #fff;
+}
+
+/* About - Card */
+.contact-card-3d {
+    background: #fff;
+    color: #000;
+    padding: 3rem;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2);
+    transform: perspective(1000px) rotateX(10deg) rotateY(-10deg);
+    transition: transform 0.1s;
 }

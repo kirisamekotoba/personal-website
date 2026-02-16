@@ -1,50 +1,45 @@
 export const PhilosophySketch = (p) => {
-    let nodes = [];
+    let gridCols = 12;
+    let gridRows = 8;
+    let colW, rowH;
 
     p.setup = () => {
         p.createCanvas(p.windowWidth, p.windowHeight);
-        // Create nodes aligned to a grid
-        for (let i = 0; i < 10; i++) {
-            nodes.push({
-                x: p.random(p.width),
-                y: p.random(p.height),
-                vx: p.random(-0.5, 0.5),
-                vy: p.random(-0.5, 0.5)
-            });
-        }
+        colW = p.width / gridCols;
+        rowH = p.height / gridRows;
     };
 
     p.draw = () => {
         p.clear();
-
-        // Draw connecting lines (Logic)
-        p.stroke(0, 30);
+        p.stroke(0, 0, 0, 40); // High contrast black lines
         p.strokeWeight(1);
 
-        nodes.forEach((n, i) => {
-            n.x += n.vx;
-            n.y += n.vy;
+        // Draw Swiss Grid Lines
+        for (let i = 1; i < gridCols; i++) {
+            p.line(i * colW, 0, i * colW, p.height);
+        }
+        for (let j = 1; j < gridRows; j++) {
+            p.line(0, j * rowH, p.width, j * rowH);
+        }
 
-            // Bounce
-            if (n.x < 0 || n.x > p.width) n.vx *= -1;
-            if (n.y < 0 || n.y > p.height) n.vy *= -1;
+        // Interactive "Focus" Box
+        // Simulates the rigid structure of logic
+        let c = p.floor(p.mouseX / colW);
+        let r = p.floor(p.mouseY / rowH);
 
-            // Connect to nearby nodes
-            nodes.forEach((other, j) => {
-                if (i !== j) {
-                    let d = p.dist(n.x, n.y, other.x, other.y);
-                    if (d < 150) {
-                        p.line(n.x, n.y, other.x, other.y);
-                    }
-                }
-            });
+        p.fill(0, 0, 0, 20);
+        p.noStroke();
+        p.rect(c * colW, r * rowH, colW, rowH);
 
-            p.fill(0);
-            p.circle(n.x, n.y, 4);
-        });
+        // Highlight corresponding row/col
+        p.fill(255, 0, 0, 100); // Swiss Red
+        p.rect(c * colW, 0, colW, 5); // Top marker
+        p.rect(0, r * rowH, 5, rowH); // Left marker
     };
 
     p.windowResized = () => {
         p.resizeCanvas(p.windowWidth, p.windowHeight);
+        colW = p.width / gridCols;
+        rowH = p.height / gridRows;
     };
 };

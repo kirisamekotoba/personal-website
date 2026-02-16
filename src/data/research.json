@@ -1,17 +1,30 @@
 {
-    "title": "Research Projects",
-    "projects": [
-        {
-            "title": "Project A: Phenomenology",
-            "description": "Investigating user interfaces through the lens of Husserl's phenomenology."
-        },
-        {
-            "title": "Project B: Algorithmic Justice",
-            "description": "Analyzing bias in predictive models and proposing structural remedies."
-        },
-        {
-            "title": "Project C: Code Aesthetics",
-            "description": "Is clean code beauty? A study on the aesthetics of software architecture."
-        }
-    ]
+    "en": {
+        "title": "Research Projects",
+        "subtitle": "My research projects and content.",
+        "projects": [
+            {
+                "title": "Project A: Phenomenology",
+                "description": "Investigating user interfaces through the lens of Husserl's phenomenology."
+            },
+            {
+                "title": "Project B: Algorithmic Justice",
+                "description": "Analyzing bias in predictive models and proposing structural remedies."
+            }
+        ]
+    },
+    "cn": {
+        "title": "研究项目",
+        "subtitle": "我的研究项目和研究内容。",
+        "projects": [
+            {
+                "title": "项目 A: 现象学",
+                "description": "通过胡塞尔现象学的视角研究用户界面。"
+            },
+            {
+                "title": "项目 B: 算法正义",
+                "description": "分析预测模型中的偏见并提出结构性补救措施。"
+            }
+        ]
+    }
 }

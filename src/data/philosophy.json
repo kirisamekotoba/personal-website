@@ -1,24 +1,38 @@
 {
-    "title": "Introduction to Philosophy",
-    "theme": "structural",
-    "articles": [
-        {
-            "title": "On the Nature of Being",
-            "meta": "Metaphysics",
-            "year": "2024",
-            "summary": "An exploration of ontology in the modern digital age. How do we define existence in a virtual space?"
-        },
-        {
-            "title": "Logic & Language",
-            "meta": "Analytic Philosophy",
-            "year": "2023",
-            "summary": "Deconstructing the syntax of thought. 'The limits of my language mean the limits of my world.'"
-        },
-        {
-            "title": "Ethics of Artificial Mind",
-            "meta": "Applied Ethics",
-            "year": "2025",
-            "summary": "What does it mean to be a moral agent in silicon? Determining responsibility in autonomous systems."
-        }
-    ]
+    "en": {
+        "title": "Introduction to Philosophy",
+        "subtitle": "Articles written for philosophy enthusiasts.",
+        "articles": [
+            {
+                "title": "On the Nature of Being",
+                "meta": "Metaphysics",
+                "year": "2024",
+                "summary": "An exploration of ontology in the modern digital age."
+            },
+            {
+                "title": "Logic & Language",
+                "meta": "Analytic Philosophy",
+                "year": "2023",
+                "summary": "Deconstructing the syntax of thought."
+            }
+        ]
+    },
+    "cn": {
+        "title": "哲学导论",
+        "subtitle": "为哲学爱好者而写的哲学普及文章。",
+        "articles": [
+            {
+                "title": "论存在的本质",
+                "meta": "形而上学",
+                "year": "2024",
+                "summary": "数字时代的本体论探索。"
+            },
+            {
+                "title": "逻辑与语言",
+                "meta": "分析哲学",
+                "year": "2023",
+                "summary": "解构思想的语法。"
+            }
+        ]
+    }
 }
