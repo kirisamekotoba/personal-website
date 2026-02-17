@@ -40,6 +40,7 @@ class App {
     constructor() {
         this.currentLang = 'en';
         this.currentRoute = 'home';
+        this.currentArticle = null; // Track active article { id, type }
         this.p5Instance = null;
         this.contentContainer = document.getElementById('app');
         this.navItems = document.querySelectorAll('.nav-item');
@@ -48,6 +49,7 @@ class App {
         // Cached data
         this.taxonomy = null;
         this.philArticles = null;
+        this.resArticles = null;
 
         this.init();
     }
@@ -70,7 +72,13 @@ class App {
         this.langToggle.innerText = this.currentLang === 'en' ? '中文' : 'EN';
         document.body.classList.toggle('lang-cn', this.currentLang === 'cn');
         this.updateNavLabels();
-        this.navigate(this.currentRoute);
+
+        // If viewing an article, reload it in the new language
+        if (this.currentArticle) {
+            this.showArticleDetail(this.currentArticle.id, this.currentArticle.type);
+        } else {
+            this.navigate(this.currentRoute);
+        }
     }
 
     updateNavLabels() {
@@ -86,6 +94,7 @@ class App {
 
     async navigate(routeKey) {
         this.currentRoute = routeKey;
+        this.currentArticle = null; // Clear active article on nav change
         const route = ROUTES[routeKey];
         if (!route) return;
 
@@ -199,7 +208,7 @@ class App {
             const artTitle = lang === 'en' ? a.title_en : a.title_cn;
             const artSummary = lang === 'en' ? a.summary_en : a.summary_cn;
             return `
-                <div class="phil-article clickable-card" data-id="${a.id}" data-file="${a.file}" data-tags="${a.tags.join(',')}">
+                <div class="phil-article clickable-card" data-id="${a.id}" data-tags="${a.tags.join(',')}">
                     <h3>${artTitle}</h3>
                     <span class="phil-year">${a.year}</span>
                     <p>${artSummary}</p>
@@ -252,7 +261,7 @@ class App {
             const artTitle = lang === 'en' ? a.title_en : a.title_cn;
             const artSummary = lang === 'en' ? a.summary_en : a.summary_cn;
             return `
-                <div class="research-card clickable-card" data-id="${a.id}" data-file="${a.file}">
+                <div class="research-card clickable-card" data-id="${a.id}">
                     <h3>${artTitle}</h3>
                     <span class="phil-year">${a.year}</span>
                     <p>${artSummary}</p>
@@ -277,8 +286,8 @@ class App {
     bindResearchCards() {
         document.querySelectorAll('.research-card.clickable-card').forEach(card => {
             card.addEventListener('click', () => {
-                const file = card.dataset.file;
-                if (file) this.showArticleDetail(file, 'research');
+                const id = card.dataset.id;
+                if (id) this.showArticleDetail(id, 'research');
             });
         });
     }
@@ -286,18 +295,40 @@ class App {
     // =====================
     // ARTICLE DETAIL VIEW
     // =====================
-    async showArticleDetail(file, folder) {
+    async showArticleDetail(id, type) {
         const backLabel = this.currentLang === 'en' ? '← Back' : '← 返回';
+
+        // Find article object
+        let collection = type === 'philosophy' ? this.philArticles : this.resArticles;
+        const article = collection?.find(a => a.id === id);
+
+        if (!article) {
+            console.error('Article not found:', id);
+            return;
+        }
+
+        // Set active state
+        this.currentArticle = { id, type };
+
+        // Determine filename based on lang
+        let filename = this.currentLang === 'cn' ? article.file_cn : article.file_en;
+        // Fallback: if CN file missing, use EN (or vice versa), which build-index.js already handles
+        // by populating both fields. But just in case:
+        if (!filename) filename = article.file_en || article.file_cn;
+
+        const folder = type; // 'philosophy' or 'research'
 
         // Hide canvas so it doesn't bleed through
         const canvasContainer = document.getElementById('canvas-container');
         if (canvasContainer) canvasContainer.style.display = 'none';
 
         try {
-            const res = await fetch(this.resolvePath(`${folder}/${file}`));
+            const res = await fetch(this.resolvePath(`${folder}/${filename}`));
+            if (!res.ok) throw new Error(`HTTP ${res.status}`);
+
             const raw = await res.text();
 
-            // Strip YAML frontmatter (between --- delimiters)
+            // Strip YAML frontmatter
             const bodyMatch = raw.match(/^---[\s\S]*?---\s*([\s\S]*)$/);
             const body = bodyMatch ? bodyMatch[1].trim() : raw;
 
@@ -314,10 +345,12 @@ class App {
             document.getElementById('btn-back')?.addEventListener('click', () => {
                 // Restore canvas
                 if (canvasContainer) canvasContainer.style.display = 'block';
+                this.currentArticle = null;
                 this.navigate(this.currentRoute);
             });
         } catch (e) {
             console.error('Failed to load article:', e);
+            this.contentContainer.innerHTML = `<p class="error">Failed to load content. Please try again.</p>`;
         }
     }
 
@@ -434,8 +467,8 @@ class App {
         // Click article card → open detail view
         document.querySelectorAll('.phil-article.clickable-card').forEach(card => {
             card.addEventListener('click', () => {
-                const file = card.dataset.file;
-                if (file) this.showArticleDetail(file, 'philosophy');
+                const id = card.dataset.id;
+                if (id) this.showArticleDetail(id, 'philosophy');
             });
         });
     }
