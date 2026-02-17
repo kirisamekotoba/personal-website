@@ -1,54 +1,77 @@
-/* Global Vars */
+/* ============================================
+   LAYOUT — Phase 5
+   ============================================ */
+
 :root {
     --bg-color: #f4f1ea;
     --text-color: #1a1a1a;
     --line-color: #2b2b2b;
+    --accent: #a63737;
     --font-heading: 'Jost', sans-serif;
     --font-body: 'Playfair Display', serif;
     --font-hand: 'Reenie Beanie', cursive;
     --font-mono: 'JetBrains Mono', monospace;
-    --nav-height: 100px;
+    --nav-height: 70px;
 }
 
-/* THEMES */
+/* === Themes === */
 body.theme-organic {
     --bg-color: #f4f1ea;
-    /* Paper */
     --text-color: #2b2b2b;
-    /* Hand drawn style */
 }
 
 body.theme-swiss {
     --bg-color: #ffffff;
-    /* Stark White */
     --text-color: #000000;
-    /* Stark Black */
-    --line-color: #000000;
+    --line-color: #000;
 }
 
 body.theme-blueprint {
-    --bg-color: #002b36;
-    /* Blueprint Dark Blue */
-    --text-color: #ffffff;
-    --line-color: rgba(255, 255, 255, 0.2);
+    --bg-color: #eef2f7;
+    --text-color: #1a2a3a;
+    --line-color: rgba(0, 0, 0, 0.08);
 }
 
 body.theme-minimal {
-    --bg-color: #e0e0e0;
+    --bg-color: #f0ece4;
     --text-color: #333;
 }
 
-/* Reset & Base */
-body {
+/* === Chinese Font Overrides === */
+body.lang-cn {
+    --font-body: 'Noto Serif SC', serif;
+    --font-hand: 'Ma Shan Zheng', cursive;
+}
+
+body.lang-cn .home-title {
+    font-family: 'Reenie Beanie', cursive;
+    font-size: 5rem;
+    line-height: 1.15;
+}
+
+body.lang-cn .hand-line {
+    font-size: 1.5rem;
+}
+
+body.lang-cn .nav-subtitle {
+    font-size: 0.65rem;
+}
+
+/* === Reset === */
+* {
+    box-sizing: border-box;
     margin: 0;
     padding: 0;
+}
+
+body {
     background-color: var(--bg-color);
     color: var(--text-color);
     font-family: var(--font-body);
-    width: 100vw;
-    height: 100vh;
-    overflow: hidden;
-    transition: background-color 0.5s ease;
+    min-height: 100vh;
+    transition: background-color 0.5s ease, color 0.4s ease;
+    overflow-x: hidden;
+    overflow-y: auto;
 }
 
 #canvas-container {
@@ -57,16 +80,16 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    z-index: -1;
+    z-index: 0;
+    pointer-events: none;
 }
 
-#grid-container {
-    /* Only visible in Swiss mode? Or handled by p5? */
-    /* Let's hide CSS grid for now and rely on Sketches for visuals to avoid conflict */
-    display: none;
+/* Allow click-to-draw on Home only */
+body.theme-organic #canvas-container {
+    pointer-events: auto;
 }
 
-/* Navigation */
+/* === Navigation === */
 header {
     position: fixed;
     top: 0;
@@ -75,77 +98,86 @@ header {
     height: var(--nav-height);
     z-index: 100;
     display: flex;
+    align-items: center;
     justify-content: space-between;
-    background: transparent;
-    /* Let canvas show through */
+    padding: 0 2rem;
+    background: rgba(255, 255, 255, 0.6);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+body.theme-blueprint header {
+    background: rgba(238, 242, 247, 0.8);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.08);
 }
 
 .nav-list {
     display: flex;
     list-style: none;
-    padding: 0;
-    margin: 0;
-    height: 100%;
+    gap: 0.5rem;
 }
 
 .nav-item {
-    padding: 0 2rem;
+    padding: 0.6rem 1.2rem;
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    align-items: flex-start;
     cursor: pointer;
-    transition: all 0.3s;
+    border-radius: 6px;
+    transition: all 0.25s ease;
 }
 
 .nav-item:hover {
-    opacity: 0.7;
+    background: rgba(0, 0, 0, 0.04);
 }
 
 .nav-item.active {
-    border-bottom: 2px solid var(--text-color);
+    background: var(--text-color);
+    color: var(--bg-color);
 }
 
 .nav-title {
     font-family: var(--font-heading);
     font-weight: 600;
-    text-transform: uppercase;
-    font-size: 0.9rem;
+    font-size: 0.85rem;
+    letter-spacing: 0.03em;
 }
 
 .nav-subtitle {
-    font-size: 0.8rem;
-    font-style: italic;
-    opacity: 0.6;
-    margin-top: 5px;
+    font-size: 0.7rem;
+    opacity: 0.5;
+    margin-top: 2px;
+    font-family: var(--font-heading);
+    font-weight: 300;
 }
 
-/* Lang Toggle */
+/* === Lang Toggle === */
 #lang-toggle {
     background: none;
     border: 1px solid var(--text-color);
     color: var(--text-color);
-    margin: 1rem;
-    padding: 0.5rem 1rem;
+    padding: 0.4rem 0.8rem;
     cursor: pointer;
     font-family: var(--font-heading);
-    height: 40px;
-    align-self: center;
+    font-size: 0.8rem;
+    border-radius: 4px;
+    transition: all 0.2s;
 }
 
-/* Content App Container */
+#lang-toggle:hover {
+    background: var(--text-color);
+    color: var(--bg-color);
+}
+
+/* === Content Container === */
 #app {
     position: relative;
     margin-top: var(--nav-height);
-    height: calc(100vh - var(--nav-height));
+    min-height: calc(100vh - var(--nav-height));
     width: 100%;
     z-index: 10;
-    padding: 2rem;
-    box-sizing: border-box;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    transition: opacity 0.5s ease;
+    padding: 4rem 6rem;
+    transition: opacity 0.4s ease;
 }
 
 .fade-out {
@@ -156,81 +188,452 @@ header {
     opacity: 1;
 }
 
-.content-block {
-    background: rgba(255, 255, 255, 0.8);
-    padding: 2rem;
-    max-width: 800px;
-    backdrop-filter: blur(5px);
+/* =============
+   HOME
+   ============= */
+.section-home {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-height: 70vh;
+    max-width: 700px;
+    padding-left: 2rem;
 }
 
-/* SPECIFIC MODULE STYLES */
-
-/* Home - Handwriting */
-.section-home .hero-block h1 {
+.home-title {
     font-family: var(--font-hand);
-    font-style: normal;
-    font-size: 5rem;
-    line-height: 0.8;
+    font-size: 5.5rem;
+    line-height: 1.0;
+    font-weight: 400;
+    margin-bottom: 4rem;
+    color: var(--text-color);
 }
 
-.section-home .hand-text {
+.home-lines {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+/* Handwriting reveal animation */
+.hand-line {
     font-family: var(--font-hand);
     font-size: 2rem;
-    transform: rotate(-2deg);
-    margin: 1rem 0;
+    opacity: 0;
+    transform: translateY(12px);
+    animation: handReveal 1s ease forwards;
 }
 
-.section-home .delay-2 {
-    transform: rotate(1deg);
-    margin-left: 20px;
+.hand-line:nth-child(1) {
+    animation-delay: 0.3s;
 }
 
-.section-home .delay-3 {
-    transform: rotate(-1deg);
-    margin-left: 40px;
+.hand-line:nth-child(2) {
+    animation-delay: 0.9s;
+    padding-left: 1.5rem;
 }
 
-/* Philosophy - Swiss */
-.swiss-style {
-    background: #fff;
-    border: 4px solid #000;
-    box-shadow: 10px 10px 0px #000;
-    border-radius: 0;
+.hand-line:nth-child(3) {
+    animation-delay: 1.5s;
+    padding-left: 3rem;
 }
 
-.swiss-style h2 {
-    font-family: 'Helvetica', 'Arial', sans-serif;
-    font-weight: 900;
-    font-size: 4rem;
-    letter-spacing: -2px;
-    border: none;
+.hand-line:nth-child(4) {
+    animation-delay: 2.1s;
+}
+
+@keyframes handReveal {
+    0% {
+        opacity: 0;
+        transform: translateY(12px);
+    }
+
+    100% {
+        opacity: 0.85;
+        transform: translateY(0);
+    }
+}
+
+
+
+
+/* =============
+   PHILOSOPHY
+   ============= */
+.section-philosophy {
+    max-width: 1100px;
+}
+
+.module-header {
+    margin-bottom: 2rem;
+}
+
+.module-header h2 {
+    font-family: var(--font-heading);
+    font-size: 2.4rem;
+    font-weight: 600;
+    margin-bottom: 0.3rem;
+}
+
+.module-subtitle {
+    font-family: var(--font-heading);
+    font-weight: 300;
+    font-size: 0.95rem;
+    opacity: 0.6;
+}
+
+.philosophy-layout {
+    display: grid;
+    grid-template-columns: 260px 1fr;
+    gap: 3rem;
+    align-items: start;
+}
+
+/* Taxonomy Tree */
+.taxonomy-tree {
+    position: sticky;
+    top: calc(var(--nav-height) + 2rem);
+    border-right: 1px solid rgba(0, 0, 0, 0.1);
+    padding-right: 1.5rem;
+    max-height: calc(100vh - var(--nav-height) - 6rem);
+    overflow-y: auto;
+}
+
+.tree-controls {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+.tree-btn {
+    font-family: var(--font-heading);
+    font-size: 0.75rem;
+    padding: 0.3rem 0.6rem;
+    background: none;
+    border: 1px solid var(--text-color);
+    color: var(--text-color);
+    cursor: pointer;
+    border-radius: 3px;
+    transition: all 0.2s;
+}
+
+.tree-btn:hover {
+    background: var(--text-color);
+    color: var(--bg-color);
+}
+
+.tree-root {
+    list-style: none;
+    font-family: var(--font-heading);
+    font-size: 0.85rem;
+}
+
+.tree-root ul {
+    list-style: none;
+    padding-left: 1rem;
+    margin-top: 0.2rem;
+}
+
+/* Two fixed top categories */
+.tree-top {
+    margin-bottom: 1.2rem;
+}
+
+.tree-top-label {
+    font-weight: 700;
+    font-size: 1rem;
+    letter-spacing: 0.02em;
+    cursor: pointer;
+    display: block;
+    padding: 0.4rem 0;
+    border-bottom: 2px solid var(--text-color);
+    margin-bottom: 0.5rem;
+}
+
+.tree-children {
+    list-style: none;
+    padding-left: 0.8rem;
+    transition: max-height 0.3s ease, opacity 0.3s ease;
+    max-height: 500px;
+    opacity: 1;
+    overflow: hidden;
+}
+
+.tree-top.collapsed>.tree-children {
+    max-height: 0;
+    opacity: 0;
+}
+
+.tree-branch,
+.tree-leaf {
+    padding: 0.3rem 0.5rem;
+    cursor: pointer;
+    border-radius: 3px;
+    margin-bottom: 0.15rem;
+    transition: background 0.15s;
+}
+
+.tree-branch:hover,
+.tree-leaf:hover {
+    background: rgba(0, 0, 0, 0.05);
+}
+
+.tree-branch>.tree-label {
+    font-weight: 600;
+    font-size: 0.85rem;
+}
+
+.tree-leaf>.tree-label {
+    font-weight: 300;
+    font-size: 0.82rem;
+}
+
+.tree-branch>ul {
+    padding-left: 0.8rem;
+}
+
+.active-tag {
+    background: var(--text-color) !important;
+    color: var(--bg-color);
+    border-radius: 3px;
+}
+
+.active-tag .tree-label {
+    color: var(--bg-color);
+}
+
+/* Article Cards */
+.article-panel {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.phil-article {
+    padding: 1.5rem;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    border-radius: 4px;
+    background: rgba(255, 255, 255, 0.5);
+    transition: box-shadow 0.2s;
+}
+
+.phil-article:hover {
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+}
+
+.phil-article h3 {
+    font-family: var(--font-heading);
+    font-size: 1.2rem;
+    margin-bottom: 0.3rem;
+}
+
+.phil-year {
+    font-family: var(--font-heading);
+    font-size: 0.75rem;
+    opacity: 0.5;
+}
+
+.phil-tags {
+    margin-top: 0.8rem;
+    display: flex;
+    gap: 0.4rem;
+    flex-wrap: wrap;
+}
+
+.tag {
+    font-family: var(--font-heading);
+    font-size: 0.7rem;
+    padding: 0.15rem 0.5rem;
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    border-radius: 2px;
+    opacity: 0.7;
+}
+
+/* =============
+   RESEARCH
+   ============= */
+.section-research {
+    max-width: 900px;
+}
+
+.research-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    gap: 1.5rem;
+    margin-top: 1.5rem;
+}
+
+.research-card {
+    padding: 1.5rem;
+    border: 1px dashed var(--line-color);
+    border-radius: 2px;
+    transition: transform 0.2s, border-color 0.2s;
+}
+
+.research-card:hover {
+    transform: translateY(-4px);
+    border-color: var(--text-color);
+}
+
+.research-card h3 {
+    font-family: var(--font-mono);
+    font-size: 1rem;
+    margin-bottom: 0.6rem;
+}
+
+.research-card p {
+    font-size: 0.9rem;
+    opacity: 0.8;
+    line-height: 1.6;
+}
+
+body.theme-blueprint .research-card {
+    background: rgba(255, 255, 255, 0.03);
+}
+
+/* =============
+   ABOUT
+   ============= */
+.section-about {
+    max-width: 600px;
+    line-height: 1.8;
+}
+
+.section-about h2 {
+    font-family: var(--font-heading);
+    font-size: 2rem;
+    margin-bottom: 1rem;
+}
+
+.about-bio {
+    font-size: 1.05rem;
+    margin-bottom: 2rem;
+    opacity: 0.85;
+}
+
+.about-section {
+    margin-bottom: 1.5rem;
+}
+
+.about-section h3 {
+    font-family: var(--font-heading);
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 0.3rem;
     text-transform: uppercase;
+    letter-spacing: 0.05em;
+    opacity: 0.6;
 }
 
-.active .nav-title {
-    font-weight: 900;
+.about-section p {
+    font-size: 0.95rem;
 }
 
-/* Research - Blueprint */
-.blueprint-style {
-    background: rgba(0, 43, 54, 0.8);
-    /* Dark Blue */
-    color: #fff;
-    border: 1px dashed #fff;
+/* =============
+   CLICKABLE CARDS
+   ============= */
+.clickable-card {
+    cursor: pointer;
 }
 
-.blueprint-card {
-    background: transparent;
-    border: 1px solid rgba(255, 255, 255, 0.3);
-    color: #fff;
+.clickable-card:hover {
+    border-color: var(--accent, #a63737);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
 }
 
-/* About - Card */
-.contact-card-3d {
-    background: #fff;
-    color: #000;
-    padding: 3rem;
-    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2);
-    transform: perspective(1000px) rotateX(10deg) rotateY(-10deg);
-    transition: transform 0.1s;
+/* =============
+   ARTICLE DETAIL VIEW
+   ============= */
+.article-detail {
+    max-width: 750px;
+    line-height: 1.9;
+    background: var(--bg-color);
+    min-height: 100vh;
+    padding-top: 2rem;
+    position: relative;
+    z-index: 5;
+}
+
+.back-btn {
+    font-family: var(--font-heading);
+    font-size: 0.85rem;
+    padding: 0.4rem 1rem;
+    background: none;
+    border: 1px solid var(--text-color);
+    color: var(--text-color);
+    cursor: pointer;
+    border-radius: 4px;
+    margin-bottom: 2rem;
+    transition: all 0.2s;
+}
+
+.back-btn:hover {
+    background: var(--text-color);
+    color: var(--bg-color);
+}
+
+.article-body h1 {
+    font-family: var(--font-heading);
+    font-size: 2.2rem;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+    line-height: 1.3;
+}
+
+.article-body h2 {
+    font-family: var(--font-heading);
+    font-size: 1.6rem;
+    font-weight: 600;
+    margin: 2rem 0 1rem;
+}
+
+.article-body h3 {
+    font-family: var(--font-heading);
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin: 1.5rem 0 0.8rem;
+}
+
+.article-body p {
+    margin-bottom: 1.2rem;
+    font-size: 1.05rem;
+}
+
+.article-body blockquote {
+    border-left: 3px solid var(--text-color);
+    padding-left: 1.2rem;
+    margin: 1.5rem 0;
+    opacity: 0.8;
+    font-style: italic;
+}
+
+.article-body code {
+    font-family: var(--font-mono);
+    background: rgba(0, 0, 0, 0.05);
+    padding: 0.15rem 0.4rem;
+    border-radius: 3px;
+    font-size: 0.9em;
+}
+
+.article-body pre {
+    background: rgba(0, 0, 0, 0.04);
+    padding: 1.2rem;
+    border-radius: 4px;
+    overflow-x: auto;
+    margin: 1.5rem 0;
+}
+
+.article-body pre code {
+    background: none;
+    padding: 0;
+}
+
+.article-body ul,
+.article-body ol {
+    margin: 1rem 0;
+    padding-left: 1.5rem;
+}
+
+.article-body li {
+    margin-bottom: 0.4rem;
 }

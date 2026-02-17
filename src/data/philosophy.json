@@ -1,37 +1,211 @@
 {
     "en": {
         "title": "Introduction to Philosophy",
-        "subtitle": "Articles written for philosophy enthusiasts.",
+        "subtitle": "Popular philosophy articles for enthusiasts.",
+        "taxonomy": {
+            "Metaphysics": {
+                "children": {
+                    "Ontology": {
+                        "children": {}
+                    },
+                    "Modality": {
+                        "children": {}
+                    },
+                    "Causation": {
+                        "children": {}
+                    }
+                }
+            },
+            "Epistemology": {
+                "children": {
+                    "Justification": {
+                        "children": {}
+                    },
+                    "Skepticism": {
+                        "children": {}
+                    },
+                    "Perception": {
+                        "children": {}
+                    }
+                }
+            },
+            "Ethics": {
+                "children": {
+                    "Normative Ethics": {
+                        "children": {}
+                    },
+                    "Metaethics": {
+                        "children": {}
+                    },
+                    "Applied Ethics": {
+                        "children": {}
+                    }
+                }
+            },
+            "Logic": {
+                "children": {
+                    "Classical Logic": {
+                        "children": {}
+                    },
+                    "Modal Logic": {
+                        "children": {}
+                    }
+                }
+            },
+            "Philosophy of Mind": {
+                "children": {
+                    "Consciousness": {
+                        "children": {}
+                    },
+                    "Intentionality": {
+                        "children": {}
+                    }
+                }
+            },
+            "Philosophy of Language": {
+                "children": {
+                    "Reference": {
+                        "children": {}
+                    },
+                    "Meaning": {
+                        "children": {}
+                    }
+                }
+            }
+        },
         "articles": [
             {
+                "id": "a1",
+                "tags": [
+                    "Ontology"
+                ],
                 "title": "On the Nature of Being",
-                "meta": "Metaphysics",
                 "year": "2024",
                 "summary": "An exploration of ontology in the modern digital age."
             },
             {
+                "id": "a2",
+                "tags": [
+                    "Classical Logic",
+                    "Meaning"
+                ],
                 "title": "Logic & Language",
-                "meta": "Analytic Philosophy",
                 "year": "2023",
                 "summary": "Deconstructing the syntax of thought."
+            },
+            {
+                "id": "a3",
+                "tags": [
+                    "Applied Ethics"
+                ],
+                "title": "Ethics of Artificial Mind",
+                "year": "2025",
+                "summary": "What does it mean to be a moral agent in silicon?"
             }
         ]
     },
     "cn": {
         "title": "哲学导论",
         "subtitle": "为哲学爱好者而写的哲学普及文章。",
+        "taxonomy": {
+            "形而上学": {
+                "children": {
+                    "本体论": {
+                        "children": {}
+                    },
+                    "模态": {
+                        "children": {}
+                    },
+                    "因果": {
+                        "children": {}
+                    }
+                }
+            },
+            "认识论": {
+                "children": {
+                    "证成": {
+                        "children": {}
+                    },
+                    "怀疑论": {
+                        "children": {}
+                    },
+                    "知觉": {
+                        "children": {}
+                    }
+                }
+            },
+            "伦理学": {
+                "children": {
+                    "规范伦理学": {
+                        "children": {}
+                    },
+                    "元伦理学": {
+                        "children": {}
+                    },
+                    "应用伦理学": {
+                        "children": {}
+                    }
+                }
+            },
+            "逻辑学": {
+                "children": {
+                    "经典逻辑": {
+                        "children": {}
+                    },
+                    "模态逻辑": {
+                        "children": {}
+                    }
+                }
+            },
+            "心灵哲学": {
+                "children": {
+                    "意识": {
+                        "children": {}
+                    },
+                    "意向性": {
+                        "children": {}
+                    }
+                }
+            },
+            "语言哲学": {
+                "children": {
+                    "指称": {
+                        "children": {}
+                    },
+                    "意义": {
+                        "children": {}
+                    }
+                }
+            }
+        },
         "articles": [
             {
+                "id": "a1",
+                "tags": [
+                    "本体论"
+                ],
                 "title": "论存在的本质",
-                "meta": "形而上学",
                 "year": "2024",
                 "summary": "数字时代的本体论探索。"
             },
             {
+                "id": "a2",
+                "tags": [
+                    "经典逻辑",
+                    "意义"
+                ],
                 "title": "逻辑与语言",
-                "meta": "分析哲学",
                 "year": "2023",
                 "summary": "解构思想的语法。"
+            },
+            {
+                "id": "a3",
+                "tags": [
+                    "应用伦理学"
+                ],
+                "title": "人工心灵的伦理",
+                "year": "2025",
+                "summary": "在硅基中成为道德主体意味着什么？"
             }
         ]
     }

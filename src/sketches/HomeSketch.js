@@ -1,53 +1,84 @@
+// HomeSketch: Subtle paper-grain background + click-to-draw ink
 export const HomeSketch = (p) => {
-    let rawPoints = []; // Stores user mouse path
-    let inkTrails = []; // Stores processed 'ink' lines
+    let dots = [];
+    let t = 0;
+    let strokes = []; // stored ink points
 
     p.setup = () => {
         p.createCanvas(p.windowWidth, p.windowHeight);
-        p.background(244, 241, 234); // Paper color
+        // Sparse floating dots
+        for (let i = 0; i < 40; i++) {
+            dots.push({
+                x: p.random(p.width),
+                y: p.random(p.height),
+                size: p.random(1.5, 4),
+                drift: p.random(0.1, 0.4),
+                phase: p.random(p.TWO_PI)
+            });
+        }
     };
 
     p.draw = () => {
-        // No clear() to simulate ink build-up
+        p.clear();
+        t += 0.005;
 
-        // Record mouse
-        if (p.mouseIsPressed || (p.abs(p.mouseX - p.pmouseX) > 2 || p.abs(p.mouseY - p.pmouseY) > 2)) {
-            rawPoints.push(p.createVector(p.mouseX, p.mouseY));
+        // Gentle grain dots drifting
+        p.noStroke();
+        dots.forEach(d => {
+            let alpha = 30 + 20 * p.sin(t * 2 + d.phase);
+            p.fill(80, 70, 60, alpha);
+            let dx = p.sin(t + d.phase) * d.drift * 30;
+            let dy = p.cos(t * 0.7 + d.phase) * d.drift * 20;
+            p.circle(d.x + dx, d.y + dy, d.size);
+        });
 
-            // Draw scratchy line
-            p.stroke(40, 40, 40, 200);
-            p.strokeWeight(p.random(1, 3));
-            p.noFill();
-
+        // Draw stored ink strokes
+        p.stroke(40, 35, 30, 180);
+        p.noFill();
+        for (const stroke of strokes) {
+            if (stroke.length < 2) continue;
             p.beginShape();
-            // Connect last few points with jitter
-            let len = rawPoints.length;
-            if (len > 2) {
-                let last = rawPoints[len - 1];
-                let second = rawPoints[len - 2];
-                p.line(second.x + p.random(-1, 1), second.y + p.random(-1, 1), last.x, last.y);
+            for (const pt of stroke) {
+                p.strokeWeight(pt.w);
+                p.curveVertex(pt.x, pt.y);
             }
             p.endShape();
         }
 
-        // Limit memory
-        if (rawPoints.length > 500) rawPoints.shift();
+        // Draw current stroke if mouse is pressed
+        if (p.mouseIsPressed) {
+            const current = strokes[strokes.length - 1];
+            if (current) {
+                current.push({
+                    x: p.mouseX + p.random(-0.5, 0.5),
+                    y: p.mouseY + p.random(-0.5, 0.5),
+                    w: p.random(1, 2.5)
+                });
+            }
+        }
     };
 
     p.mousePressed = () => {
-        // Splatter effect
-        for (let i = 0; i < 10; i++) {
-            let r = p.random(2, 5);
-            let x = p.mouseX + p.random(-20, 20);
-            let y = p.mouseY + p.random(-20, 20);
-            p.noStroke();
-            p.fill(20, 20, 20, 150);
-            p.circle(x, y, r);
+        // Start a new stroke
+        strokes.push([{
+            x: p.mouseX,
+            y: p.mouseY,
+            w: p.random(1, 2.5)
+        }]);
+
+        // Ink splatter
+        p.noStroke();
+        p.fill(30, 25, 20, 100);
+        for (let i = 0; i < 5; i++) {
+            p.circle(
+                p.mouseX + p.random(-10, 10),
+                p.mouseY + p.random(-10, 10),
+                p.random(1.5, 3.5)
+            );
         }
     };
 
     p.windowResized = () => {
         p.resizeCanvas(p.windowWidth, p.windowHeight);
-        p.background(244, 241, 234);
     };
 };

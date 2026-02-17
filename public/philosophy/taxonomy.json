@@ -1,0 +1,92 @@
+{
+    "Metaphysics": {
+        "label_cn": "形而上学",
+        "children": {
+            "Ontology": {
+                "label_cn": "本体论",
+                "children": {}
+            },
+            "Modality": {
+                "label_cn": "模态",
+                "children": {}
+            },
+            "Causation": {
+                "label_cn": "因果",
+                "children": {}
+            },
+            "Epistemology": {
+                "label_cn": "认识论",
+                "children": {}
+            },
+            "Logic": {
+                "label_cn": "逻辑学",
+                "children": {
+                    "Classical Logic": {
+                        "label_cn": "经典逻辑",
+                        "children": {}
+                    },
+                    "Modal Logic": {
+                        "label_cn": "模态逻辑",
+                        "children": {}
+                    }
+                }
+            },
+            "Philosophy of Mind": {
+                "label_cn": "心灵哲学",
+                "children": {
+                    "Consciousness": {
+                        "label_cn": "意识",
+                        "children": {}
+                    },
+                    "Intentionality": {
+                        "label_cn": "意向性",
+                        "children": {}
+                    }
+                }
+            },
+            "Philosophy of Language": {
+                "label_cn": "语言哲学",
+                "children": {
+                    "Reference": {
+                        "label_cn": "指称",
+                        "children": {}
+                    },
+                    "Meaning": {
+                        "label_cn": "意义",
+                        "children": {}
+                    }
+                }
+            }
+        }
+    },
+    "Value Theory": {
+        "label_cn": "价值论",
+        "children": {
+            "Ethics": {
+                "label_cn": "伦理学",
+                "children": {
+                    "Normative Ethics": {
+                        "label_cn": "规范伦理学",
+                        "children": {}
+                    },
+                    "Metaethics": {
+                        "label_cn": "元伦理学",
+                        "children": {}
+                    },
+                    "Applied Ethics": {
+                        "label_cn": "应用伦理学",
+                        "children": {}
+                    }
+                }
+            },
+            "Aesthetics": {
+                "label_cn": "美学",
+                "children": {}
+            },
+            "Political Philosophy": {
+                "label_cn": "政治哲学",
+                "children": {}
+            }
+        }
+    }
+}

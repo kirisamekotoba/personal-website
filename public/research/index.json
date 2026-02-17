@@ -1,0 +1,27 @@
+[
+  {
+    "id": "project-algorithmic-justice",
+    "file": "project-algorithmic-justice.md",
+    "title_en": "Project B: Algorithmic Justice",
+    "title_cn": "项目 B: 算法正义",
+    "tags": [
+      "Ethics",
+      "AI"
+    ],
+    "year": "2025",
+    "summary_en": "Analyzing bias in predictive models and proposing structural remedies.",
+    "summary_cn": "分析预测模型中的偏见并提出结构性补救措施。"
+  },
+  {
+    "id": "project-phenomenology",
+    "file": "project-phenomenology.md",
+    "title_en": "Project A: Phenomenology",
+    "title_cn": "项目 A: 现象学",
+    "tags": [
+      "Phenomenology"
+    ],
+    "year": "2024",
+    "summary_en": "Investigating user interfaces through the lens of Husserl's phenomenology.",
+    "summary_cn": "通过胡塞尔现象学的视角研究用户界面。"
+  }
+]

@@ -1,0 +1,39 @@
+[
+  {
+    "id": "ethics-of-artificial-mind",
+    "file": "ethics-of-artificial-mind.md",
+    "title_en": "Ethics of Artificial Mind",
+    "title_cn": "人工心灵的伦理",
+    "tags": [
+      "Applied Ethics"
+    ],
+    "year": "2025",
+    "summary_en": "What does it mean to be a moral agent in silicon?",
+    "summary_cn": "在硅基中成为道德主体意味着什么？"
+  },
+  {
+    "id": "logic-and-language",
+    "file": "logic-and-language.md",
+    "title_en": "Logic & Language",
+    "title_cn": "逻辑与语言",
+    "tags": [
+      "Classical Logic",
+      "Meaning"
+    ],
+    "year": "2023",
+    "summary_en": "Deconstructing the syntax of thought.",
+    "summary_cn": "解构思想的语法。"
+  },
+  {
+    "id": "on-the-nature-of-being",
+    "file": "on-the-nature-of-being.md",
+    "title_en": "On the Nature of Being",
+    "title_cn": "论存在的本质",
+    "tags": [
+      "Ontology"
+    ],
+    "year": "2024",
+    "summary_en": "An exploration of ontology in the modern digital age.",
+    "summary_cn": "数字时代的本体论探索。"
+  }
+]

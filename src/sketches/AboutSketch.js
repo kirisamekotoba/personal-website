@@ -1,28 +1,24 @@
+// AboutSketch: Minimal. Just quiet floating rings.
 export const AboutSketch = (p) => {
+    let t = 0;
+
     p.setup = () => {
-        p.createCanvas(p.windowWidth, p.windowHeight, p.WEBGL);
+        p.createCanvas(p.windowWidth, p.windowHeight);
     };
 
     p.draw = () => {
         p.clear();
-
-        // Subtle 3D rotation based on mouse
-        let locX = p.mouseX - p.height / 2;
-        let locY = p.mouseY - p.width / 2;
-
-        p.ambientLight(50);
-        p.directionalLight(255, 255, 255, 0.25, 0.25, 0);
-        p.pointLight(0, 0, 255, locX, locY, 250);
-
-        // Just some floating geometric shapes for minimalism
-        p.push();
-        p.rotateZ(p.frameCount * 0.01);
-        p.rotateX(p.frameCount * 0.01);
-        p.rotateY(p.frameCount * 0.01);
+        t += 0.003;
         p.noFill();
-        p.stroke(0, 50);
-        p.box(300);
-        p.pop();
+        p.stroke(0, 0, 0, 15);
+        p.strokeWeight(1);
+
+        for (let i = 0; i < 5; i++) {
+            let x = p.width * 0.5 + p.sin(t + i) * 100;
+            let y = p.height * 0.5 + p.cos(t * 0.8 + i * 0.7) * 80;
+            let r = 60 + i * 40 + p.sin(t + i * 2) * 20;
+            p.ellipse(x, y, r, r);
+        }
     };
 
     p.windowResized = () => {
