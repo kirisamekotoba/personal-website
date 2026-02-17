@@ -53,6 +53,7 @@ function autoIndexPlugin() {
     };
 }
 
-export default defineConfig({
-    plugins: [autoIndexPlugin()]
-});
+export default defineConfig(({ mode }) => ({
+    plugins: [autoIndexPlugin()],
+    base: mode === 'production' ? '/personal-website/' : '/'
+}));
