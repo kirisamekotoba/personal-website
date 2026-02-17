@@ -634,6 +634,181 @@ body.theme-blueprint .research-card {
     padding-left: 1.5rem;
 }
 
-.article-body li {
-    margin-bottom: 0.4rem;
+/* =============
+   MOBILE RESPONSIVENESS
+   ============= */
+@media (max-width: 768px) {
+    :root {
+        --nav-height: auto;
+        /* Allow nav to grow */
+    }
+
+    /* Global Typography Scale Down */
+    html {
+        font-size: 14px;
+        /* Base scale down */
+    }
+
+    /* Layout & Container */
+    #app {
+        padding: 2rem 1.5rem;
+        /* Reduce padding significantly */
+        margin-top: 60px;
+        /* Approximate header height */
+    }
+
+    /* Header & Nav */
+    header {
+        position: relative;
+        /* Unfix on mobile to prevent overlay issues if content is tall */
+        height: auto;
+        padding: 1rem;
+        flex-direction: column;
+        align-items: center;
+        gap: 1rem;
+        background: rgba(255, 255, 255, 0.98);
+        /* Opaque background */
+        border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    }
+
+    .nav-list {
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 0.5rem;
+        width: 100%;
+    }
+
+    .nav-item {
+        padding: 0.5rem 1rem;
+        flex: 1 1 40%;
+        /* 2 items per row approx */
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        background: rgba(0, 0, 0, 0.03);
+        /* Subtle background for touch targets */
+        border-radius: 4px;
+    }
+
+    .nav-title {
+        font-size: 0.9rem;
+    }
+
+    .nav-subtitle {
+        display: none;
+        /* Keep hidden */
+    }
+
+    #lang-toggle {
+        position: absolute;
+        top: 1rem;
+        right: 1rem;
+        background: white;
+        border: 1px solid var(--text-color);
+        z-index: 101;
+    }
+
+    /* Home Section */
+    .section-home {
+        min-height: 50vh;
+        padding: 2rem 0;
+        align-items: flex-start;
+        width: 100%;
+    }
+
+    .home-title {
+        font-size: 3rem;
+        margin-bottom: 1.5rem;
+        line-height: 1.0;
+    }
+
+    .hand-line {
+        font-size: 1.6rem;
+        padding-left: 0 !important;
+        /* Remove indentation on mobile */
+    }
+
+    /* Philosophy Section - FORCED STACKING */
+    .philosophy-layout {
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+        width: 100%;
+    }
+
+    /* Taxonomy Tree */
+    .taxonomy-tree {
+        position: relative;
+        width: 100%;
+        height: auto;
+        max-height: none;
+        border-right: none;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+        padding-right: 0;
+        padding-bottom: 1rem;
+        overflow-x: auto;
+        overflow-y: hidden;
+        white-space: nowrap;
+        display: block;
+    }
+
+    .tree-root {
+        display: flex;
+        flex-direction: row;
+        gap: 1rem;
+        padding-bottom: 0.5rem;
+    }
+
+    .tree-top {
+        margin-bottom: 0;
+        flex: 0 0 auto;
+    }
+
+    /* Hide children on mobile for now to simplify tree */
+    .tree-children {
+        display: none;
+    }
+
+    .article-panel {
+        width: 100%;
+    }
+
+    .phil-article {
+        width: 100%;
+        box-sizing: border-box;
+        /* Ensure padding doesn't overflow */
+    }
+
+    /* Research Section */
+    .research-grid {
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+    }
+
+    .research-card {
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    /* Article Detail */
+    .article-detail {
+        padding-top: 0;
+    }
+
+    .article-body h1 {
+        font-size: 1.8rem;
+    }
+
+    .article-body h2 {
+        font-size: 1.4rem;
+    }
+
+    /* Canvas (Background) */
+    #canvas-container {
+        opacity: 0.4;
+        /* Fade out background on mobile to improve readability */
+    }
 }
