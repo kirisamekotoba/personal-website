@@ -122,11 +122,20 @@ class App {
         }
     }
 
+    // Helper to resolve paths with base URL (for GitHub Pages)
+    resolvePath(path) {
+        // Vite's import.meta.env.BASE_URL includes trailing slash (e.g. "/personal-website/")
+        const base = import.meta.env.BASE_URL;
+        // Remove leading slash from path to avoid double slashes
+        const cleanPath = path.startsWith('/') ? path.slice(1) : path;
+        return `${base}${cleanPath}`;
+    }
+
     async renderContent(type) {
         let html = '';
 
         if (type === 'home') {
-            const res = await fetch('/home.json');
+            const res = await fetch(this.resolvePath('home.json'));
             const data = (await res.json())[this.currentLang];
 
             // Title is ALWAYS English. Do not translate.
@@ -146,7 +155,7 @@ class App {
         } else if (type === 'research') {
             html = await this.renderResearch();
         } else if (type === 'about') {
-            const res = await fetch('/about.json');
+            const res = await fetch(this.resolvePath('about.json'));
             const data = (await res.json())[this.currentLang];
             const sections = data.sections.map(s => `
                 <div class="about-section">
@@ -172,11 +181,11 @@ class App {
     async renderPhilosophy() {
         // Load taxonomy and articles from public/
         if (!this.taxonomy) {
-            const taxRes = await fetch('/philosophy/taxonomy.json');
+            const taxRes = await fetch(this.resolvePath('philosophy/taxonomy.json'));
             this.taxonomy = await taxRes.json();
         }
         if (!this.philArticles) {
-            const artRes = await fetch('/philosophy/index.json');
+            const artRes = await fetch(this.resolvePath('philosophy/index.json'));
             this.philArticles = await artRes.json();
         }
 
@@ -231,7 +240,7 @@ class App {
     async renderResearch() {
         // Load from .md-based index
         if (!this.resArticles) {
-            const artRes = await fetch('/research/index.json');
+            const artRes = await fetch(this.resolvePath('research/index.json'));
             this.resArticles = await artRes.json();
         }
 
@@ -285,7 +294,7 @@ class App {
         if (canvasContainer) canvasContainer.style.display = 'none';
 
         try {
-            const res = await fetch(`/${folder}/${file}`);
+            const res = await fetch(this.resolvePath(`${folder}/${file}`));
             const raw = await res.text();
 
             // Strip YAML frontmatter (between --- delimiters)
